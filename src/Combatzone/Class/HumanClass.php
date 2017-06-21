@@ -3,8 +3,8 @@
      abstract class Human {
 
     const LOW_PV = 100;
-    const MEDIUM_PV = 150;
-    const HIGH_PV = 200;
+    const MEDIUM_PV = 200;
+    const HIGH_PV = 250;
 
 
     const LOW_POWER = 5;

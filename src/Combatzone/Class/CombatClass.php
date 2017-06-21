@@ -35,10 +35,10 @@ class Combat
             $this->render->message($SpaceMarine->getName() . " attaque " . $ChaosMarine->getName());        
             $rand = rand(1, 2);
             if($rand == 1) {
-                $this->render->message ($ChaosMarineName . " Utilise son Bolter ");                
+                $this->render->message ($SpaceMarineName . " Utilise son Bolter ");                
                 $SpaceMarine->attack($ChaosMarine);
                  }else if ($rand == 2) {
-                $this->render->message ($ChaosMarineName . " Utilise son Epee-tranconneuse ");                                     
+                $this->render->message ($SpaceMarineName . " Utilise son Epee-tranconneuse ");                                     
                 $SpaceMarine->slash($ChaosMarine);
                  }                
             break;
@@ -66,18 +66,22 @@ class Combat
     {
         while (True) {
             $this->combatTurn($SpaceMarine, $ChaosMarine);  
-            if($SpaceMarine->state() == False || $ChaosMarine->state() == False){
-                // C'est la fin du combat, on a un vainqueur;
-                $this->render->success('Victoire');
+            if($SpaceMarine->state() == False && $ChaosMarine->state() == True){
+            // le marine du chaos à gagné
+            $this->render->success('Le chaos a vaincu');
                 return True;
-            }else if($SpaceMarine->state() == False || $ChaosMarine->state() == False) {
-                // Les deux sont morts match nul
-                $this->render->info('Match nul');
-                echo "Match nul";
-                return True;
-            }
+            }else if($ChaosMarine->state() == False && $SpaceMarine->state() == True) { 
+            // le SpaceMarine à gagné 
+            $this->render->success('La loi a vaincu'); 
+                return True;                        
+            }else if($SpaceMarine->state() == False && $ChaosMarine->state() == False) {                             
+            // Match nul les deux sont morts
+            $this->render->info('Match Nul'); 
+                return True;   
+            }else if($SpaceMarine->state() == True && $ChaosMarine->state() == True){ 
+            // Les deux sont vivants on continue
             $this->turn = $this->turn + 1;
-            #code
+             }
         }
     }
 }
